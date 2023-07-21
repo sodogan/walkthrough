@@ -1,0 +1,107 @@
+<mvc:View
+   xmlns="sap.uxap"
+   xmlns:m="sap.m"
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns:core="sap.ui.core"
+   controllerName="sap.ui.demo.walkthrough.controller.OrderDetails"
+   xmlns:custom= "sap.ui.demo.walkthrough.control"
+   >
+     <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" upperCaseAnchorBar="false" showFooter="true"  >
+      <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                 <m:HBox>
+                    <m:VBox>
+                        <m:Title text="{CustomerID}" wrapping="true" />
+                        <m:Text text="{ShipAddress}" />
+                        <m:Text text="{ShipCity}" />
+                    </m:VBox>
+                    </m:HBox>
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:Title text="{OrderID}" wrapping="true" />
+                </snappedHeading>
+
+                <expandedContent>
+                    <m:Text text="{OrderID}" />
+                </expandedContent>
+                <actions>
+                    <ObjectPageHeaderActionButton text="RUX" type="Emphasized" press=".onOpenRUX" hideText="false" />
+                    <ObjectPageHeaderActionButton text="CRM UI" type="Emphasized" press=".onOpenCRMUI" hideText="false" />
+                    <ObjectPageHeaderActionButton text="ACCORD" type="Emphasized" press=".onOpenAccord" hideText="false" />
+                    <ObjectPageHeaderActionButton id="butBundleNav" visible="{TrackerView>/showBundleNavigate}" text="BUNDLE" type="Emphasized" press=".onOpenBundle" hideText="false" />
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+      <headerContent>
+            <m:FlexBox wrap="Wrap" fitContainer="true">
+                <m:VBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                    <m:HBox class="sapUiLargeMarginEnd sapUiSmallMarginBottom">
+                        <m:Label text="Order Id:" class="sapUiTinyMarginEnd" />
+                        <!-- <m:Link text="{PropertyId}" href="{UrlPropertyCRMUI}" /> -->
+                        <!-- <core:Icon src="sap-icon://alert" width="100px" color="Negative" visible="{HasWarning}" press=".onPropIconPress" /> -->
+                    </m:HBox>
+                    <m:Text width="100%" text="{OrderID}" />
+                </m:VBox>
+            </m:FlexBox>
+        </headerContent>
+
+     <sections>
+  
+         <ObjectPageSection titleUppercase="false" id="EmployeeDetailsSection" title="Employee Details">
+                <subSections>
+                <ObjectPageSubSection id="SubSectionEmployeeDetails" >
+                   <core:Fragment fragmentName="sap.ui.demo.walkthrough.fragment.EmployeeDetails" type="XML" />
+                 </ObjectPageSubSection>
+                </subSections>
+           </ObjectPageSection>
+
+          <ObjectPageSection titleUppercase="false" id="OrderDetailsSection" title="Order Details">
+                <subSections>
+                    <ObjectPageSubSection id="SubSectionOrderDetails" >
+                      <core:Fragment fragmentName="sap.ui.demo.walkthrough.fragment.OrderDetailsTable" type="XML" />
+                     </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+          <ObjectPageSection titleUppercase="false" id="LibraryControlSection" title="Library reference">
+                <subSections>
+                    <ObjectPageSubSection id="SubSectionLibraryReference" >
+                      <core:Fragment fragmentName="sap.ui.demo.walkthrough.fragment.LibraryReferencedControl" type="XML" />
+                     </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>  
+
+
+      </sections>  
+       <footer>
+            <m:OverflowToolbar visible="{= ${appState>/hasError}  ||  ${appState>/hasPendingChanges}  ||  ${message>/}.length>0  ? true : false }">
+                <m:content>
+                    <custom:ActionBar id="ActionBar" flagState="false" favoriteState="false" updateState="false" showUpdate="false" showFollow="false" showFlag="false" showFavorite="false" showOpen="false">
+                     <custom:_businessActionButtons>
+                      <m:Button  id="oButton" class="acActionBarBtn" icon="{Icon}" lite="true" press=".onActionPress"  tooltip="{Description}">
+                       </m:Button>
+                     </custom:_businessActionButtons>
+                    </custom:ActionBar>
+
+                    <m:Button visible="{appState>/hasError}" icon="sap-icon://message-popup" type="Reject" press="onMessagesButtonPress" text="{appState>/errorCount}" />
+                    <m:ToolbarSpacer />
+                    
+                    <m:Text text="Pending Changes." visible="{appState>/hasPendingChanges}" />
+                    <m:Button type="Accept" visible="{appState>/hasPendingChanges}" press="onSave" text="Save" />
+                    <m:Button type="Accept" visible="{appState>/hasPendingChanges}" press="onRevert" text="Revert" />
+                    <m:Button
+                        icon="sap-icon://alert"
+                        text="{= ${message>/}.length }"
+                        visible="{= ${message>/}.length > 0 }"
+                        type="Emphasized"
+                        press="onMessagePopoverPress" />
+                    </m:content>
+                  
+            </m:OverflowToolbar>
+
+        </footer>	    
+    
+    </ObjectPageLayout>
+</mvc:View>

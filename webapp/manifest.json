@@ -1,0 +1,139 @@
+{
+  "_version": "1.49.0",
+  "sap.app": {
+    "id": "sap.ui.demo.walkthrough",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.10.2",
+      "toolsId": "6a98f541-4fab-4355-8d28-ec876ff20c4f"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/V2/Northwind/Northwind.svc/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.116.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.ui.demo.walkthrough.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+      }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "sap.ui.demo.walkthrough.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false,
+        "bypassed": {
+          "target": "notFound"
+        }
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "orders",
+          "target": "orders_target"
+        },
+        {
+          "pattern": "order/details/{orderId}",
+          "name": "orderDetails",
+          "target": "order_details_target"
+        }
+      ],
+      "targets": {
+        "orders_target": {
+          "viewId": "_orders",
+          "viewLevel": 1,
+          "viewName": "Orders"
+        },
+        "order_details_target": {
+          "viewId": "_orderDetails",
+          "viewLevel": 2,
+          "viewName": "OrderDetails"
+        },
+        "notFound": {
+          "id": "notFound",
+          "name": "NotFound",
+          "transition": "show"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "sap.ui.demo.walkthrough.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<core:FragmentDefinition
+ xmlns="sap.m"
+ xmlns:f="sap.f" 
+ xmlns:mvc="sap.ui.core.mvc" 
+ xmlns:smartTable="sap.ui.comp.smarttable" 
+ xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" 
+ xmlns:smartField="sap.ui.comp.smartfield" 
+ xmlns:smartForm="sap.ui.comp.smartform" 
+ xmlns:core="sap.ui.core" 
+>
+	<VBox fitContainer="true">
+                <smartFilterBar:SmartFilterBar id="oOrderssmartFilterBar" entitySet="Orders" persistencyKey="SmartFilter_Explored" visible="true">
+                <smartFilterBar:controlConfiguration >
+                    <smartFilterBar:ControlConfiguration id="oControlConfigOrderID" groupId="_BASIC" key="OrderID" index = "1" visible="true">
+                        <smartFilterBar:defaultFilterValues>
+                            <smartFilterBar:SelectOption low="10248">
+                            </smartFilterBar:SelectOption>
+                        </smartFilterBar:defaultFilterValues>
+                    </smartFilterBar:ControlConfiguration>
+                     <smartFilterBar:ControlConfiguration id="oControlConfigRatingIndicator" groupId="_BASIC"   key="RatingIndicator"  index= "2"  label ="Rating">
+                        <smartFilterBar:customControl >
+			             <RatingIndicator id="idRatingIndicator" value="0" enabled="true"/>
+            			 </smartFilterBar:customControl>     
+                    </smartFilterBar:ControlConfiguration> 
+                    <smartFilterBar:ControlConfiguration id="oControlConfigShipCity" groupId="_BASIC"   key="ShipCity"  index= "3"  label ="Ship City">
+                        <smartFilterBar:customControl >
+			             <ComboBox value="Add 1 New Condition"  id="cmbConditionNumber">
+                                    <items>
+                                        <core:Item text="Add 1 New Condition" key="1"/>
+                                        <core:Item text="Add 5 New Conditions" key="5"/>
+                                        <core:Item text="Add 10 New Conditions" key="10"/>
+                                        <core:Item text="Add 20 New Conditions" key="20"/>
+                                        <core:Item text="Add 30 New Conditions" key="30"/>
+                                        <core:Item text="Add 40 New Conditions" key="40"/>
+                                    </items>
+                          </ComboBox>
+            			 </smartFilterBar:customControl>     
+                    </smartFilterBar:ControlConfiguration> 
+
+            </smartFilterBar:controlConfiguration>
+            </smartFilterBar:SmartFilterBar>
+            
+                <smartTable:SmartTable header="Orders" showRowCount="true"  id="smartTableOrders" smartFilterId="smartFilterBar" showVariantManagement="true" tableType="ResponsiveTable"  
+                   entitySet="Orders" enableAutoBinding="true" persistencyKey="SmartFilter_Explored" initiallyVisibleFields="OrderID,CustomerID,EmployeeID,Freight" 
+                   useVariantManagement="true" useTablePersonalisation="true"
+                   initialise="onInitialize" beforeRebindTable="onBeforeRebindConditionTable" >
+                        <smartTable:customToolbar>
+                            <OverflowToolbar design="Transparent">
+                                <ToolbarSpacer/>
+                                <!-- <ComboBox value="Add 1 New Condition" width="25%" id="cmbConditionNumber">
+                                    <items>
+                                        <core:Item text="Add 1 New Condition" key="1"/>
+                                        <core:Item text="Add 5 New Conditions" key="5"/>
+                                        <core:Item text="Add 10 New Conditions" key="10"/>
+                                        <core:Item text="Add 20 New Conditions" key="20"/>
+                                        <core:Item text="Add 30 New Conditions" key="30"/>
+                                        <core:Item text="Add 40 New Conditions" key="40"/>
+                                    </items>
+                                </ComboBox> -->
+                                <OverflowToolbarButton icon="sap-icon://upload" text="Upload" press="onUpload"/>          
+                                <OverflowToolbarButton icon="sap-icon://add" tooltip="{i18n>conditionCreateNew}" press="onConditionAdd"/>
+                                <OverflowToolbarButton icon="sap-icon://attachment-text-file" tooltip="Download Condition Template" press="onConditionTemplateDownload"/>
+                                 <OverflowToolbarButton icon="sap-icon://delete" tooltip="Delete" press="onConditionDelete"/>
+                            </OverflowToolbar>
+                        </smartTable:customToolbar>
+                          <Table id="tableConditions"   growingThreshold="10"  selectionChange=".onSelect" sticky="ColumnHeaders,HeaderToolbar"  growing="true" growingScrollToLoad="true">
+                           <ColumnListItem type="Navigation" press=".onOrderSelect"/>
+                          </Table>
+                       
+            </smartTable:SmartTable>
+            </VBox>
+</core:FragmentDefinition>

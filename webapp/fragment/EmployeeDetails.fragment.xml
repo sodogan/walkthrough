@@ -1,0 +1,73 @@
+<core:FragmentDefinition
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:l="sap.ui.layout"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:TypeInteger="sap.ui.model.type"
+    xmlns:custom= "sap.ui.demo.walkthrough.control" 
+
+    >
+        <smartForm:SmartForm editable="true" id='oEmployeeDetails' >
+          <smartForm:Group title="General Details" >
+              <smartForm:GroupElement label= "Employee ID" >
+                 <m:Input id="iEmployeeId" editable="true" value="{ path: 'EmployeeID', type:'sap.ui.model.type.Integer',constraints: {
+                                            minimum: 1,
+                                            maximum: 4
+                                           }}"  />
+              </smartForm:GroupElement>
+              
+              <smartForm:GroupElement label= "First Name" >
+                 <smartField:SmartField editable="true" 
+                                        fieldGroupIds="General"   
+                                        value="{ 
+                                                path: 'FirstName',
+                                                type: 'aklc.type.ExtendedName'
+                                                }" 
+                                         innerControlsCreated= "onSmartFieldInnerControlsCreated" />
+              </smartForm:GroupElement>
+
+              <smartForm:GroupElement label= "Last Name" >
+                 <smartField:SmartField editable="true" fieldGroupIds="General"   
+                                        value="{ 
+                                        path: 'LastName', 
+                                        type: 'aklc.type.ExtendedName' 
+                                        }"   innerControlsCreated= "onSmartFieldInnerControlsCreated"/>
+              </smartForm:GroupElement>
+
+              <smartForm:GroupElement label="Address Details">
+                 <m:TextArea rows="10" editable="true" width="100%" value="{ path: 'FirstName', type:'sap.ui.model.type.String', 
+                                         constraints: { minimum: 4,  maximum: 80 } 
+                                         }"  
+                  />
+              </smartForm:GroupElement>
+
+               <smartForm:GroupElement label= "City"  >
+                 <custom:FunkyInput  value="{ path: 'City', type:'sap.ui.model.type.String',constraints: { } }"  
+                                     tooltip = "Information" 
+                                     endPress="onInformationButtonPressed"  />
+              </smartForm:GroupElement>
+
+              <smartForm:GroupElement label="Birth Date">
+                <smartField:SmartField editable="true"  fieldGroupIds="General" 
+                                                        value="{
+                                                         path:'BirthDate',
+                                                         type:'sap.ui.model.type.Date',
+                                                         formatOptions: {
+                                                            style: 'short',
+                                                            strictParsing: true
+                                                         },
+                                                         constraints: { }
+                                                      }"/>
+             </smartForm:GroupElement>
+ 
+       </smartForm:Group>
+    </smartForm:SmartForm>
+</core:FragmentDefinition>
+
