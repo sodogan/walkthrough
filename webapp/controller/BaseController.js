@@ -31,6 +31,12 @@ sap.ui.define([
             //     }
             // },
             formatter: formatter,
+            getMoment: function () {
+                return this.getOwnerComponent().getMoment();
+            },
+            getLodash: function () {
+                return this.getOwnerComponent().getLodash();
+            },
             //lifecycle Method
             onInit: function () {
                 debugger;

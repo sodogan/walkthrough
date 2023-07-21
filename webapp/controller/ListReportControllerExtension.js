@@ -96,12 +96,6 @@ sap.ui.define([
 				},
 
 				// override public method of the base controller
-				modifyStartupExtension: function (oStartupObject) {
-					debugger;
-					let oSelectionVariant = oStartupObject.selectionVariant;
-					if (oSelectionVariant) {
-					}
-				},
 				onInitSmartFilterBarExtension: function () {
 					debugger;
 				},

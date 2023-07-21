@@ -6,14 +6,25 @@ sap.ui.define(
         "sap/m/UploadCollectionParameter",
         "sap/m/MessageToast",
         "sap/m/library",
-        "./ListReportControllerExtension"
+        "./ListReportControllerExtension",
+        'sap/ui/core/mvc/OverrideExecution'
     ],
-    function (BaseController, Filter, FilterOperator, JSONModel, UploadCollectionParameter, MessageToast, library, ListReportControllerExtension) {
+    function (BaseController, Filter, FilterOperator, JSONModel, UploadCollectionParameter, MessageToast, library, ListReportControllerExtension,OverrideExecution) {
 
         const ListMode = library.ListMode;
         const ListSeparators = library.ListSeparators;
 
         return BaseController.extend('sap.ui.demo.walkthrough.controller.Orders', {
+
+            metadata: {
+                "abstract" : false,
+                stereotype: "controller",
+                methods: {
+                    "onInitSmartFilterBarExtension": { "public": true, "final": false, "overrideExecution": OverrideExecution.After },//can be overridable
+                    "onBeforeRebindTableExtension": { "public": true, "final": false  }
+
+                }
+            },
 
             extensionAPI: ListReportControllerExtension,
             uploadTemplate: {
@@ -70,7 +81,21 @@ sap.ui.define(
 
                 debugger;
 
+                //get the lodash library
+                let lodashUtil = this.getLodash();
 
+                //get the moment library
+                let momentLibrary = this.getMoment();
+
+
+            },
+            //This method is overriden by the extension API
+            onInitSmartFilterBarExtension: function () {
+                debugger;
+            },
+            //This method is overriden by the extension API
+            onBeforeRebindTableExtension: function (oEvent) {
+                debugger;
             },
             onBeforeUploadStarts: function (oEvent) {
                 // Header Slug

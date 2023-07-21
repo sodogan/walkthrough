@@ -6,8 +6,10 @@ sap.ui.define([
     "./model/DeviceModel",
     "sap/ui/model/BindingMode",
     "./utils/ErrorHandler",
-    "./control/ExtendedName"
-], function (UIComponent, JSONModel, Device,models,DeviceModel, BindingMode, ErrorHandler) {
+    "./control/ExtendedName",
+    "thirdparty/lodash/lodash",
+    "thirdparty/moment/moment"
+], function (UIComponent, JSONModel, Device, models, DeviceModel, BindingMode, ErrorHandler) {
     "use strict";
 
     return UIComponent.extend("sap.ui.demo.walkthrough.Component", {
@@ -27,20 +29,33 @@ sap.ui.define([
             UIComponent.prototype.init.apply(this, arguments);
 
             // set the device model
-            this._deviceModel = new DeviceModel(this,Device,BindingMode.OneWay)
+            this._deviceModel = new DeviceModel(this, Device, BindingMode.OneWay)
             this._deviceModel.setModel("device");
             //set the overall application state model here
             this.setModel(this.createApplicationStateModel(), "appState");
-            
+
             //Create the error handler
             this._oErrorHandler = new ErrorHandler(this);
 
             // create the views based on the url/hash
             this.getRouter().initialize();
 
-
+            //Set the thirdparty library for all controllers 
+            //This does not work in fiori but works in ui5            
+            //set the lodash
+            if (!this._moment) {
+                this._moment = moment();
+            }
+            if (!this._lodash) {
+                this._lodash = _;
+            }
         },
-
+        getMoment: function () {
+            return this._moment;
+        },
+        getLodash: function () {
+            return this._lodash;
+        },
         //get  the application state
         createApplicationStateModel: function () { // General Component related Data - Error Handeling , FileAPI Path etc 
             return new JSONModel(this._applicationState);

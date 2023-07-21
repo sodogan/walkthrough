@@ -20,7 +20,7 @@ server:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         ui5:
           path:
-            - /resources
+            - /resources/sap*
             - /test-resources
           url: https://ui5.sap.com
         backend:
@@ -37,4 +37,30 @@ server:
       configuration:
         component: sap.ui.demo.walkthrough
         ui5Theme: sap_horizon
+---
+  specVersion: "2.6"
+  kind: extension
+  type: project-shim
+  metadata:
+    name: thirdparty # this can be your project shim name
+  shims:
+    configurations:
+      lodash: # name as defined in package.json
+        specVersion: "2.6"
+        type: module # Use module type
+        metadata:
+          name: lodash
+        resources:
+          configuration:
+            paths:
+              /resources/thirdparty/lodash/: "" # location where modules are stored
+      moment: # name as defined in package.json
+        specVersion: "2.6"
+        type: module # Use module type
+        metadata:
+          name: moment
+        resources:
+          configuration:
+            paths:
+              /resources/thirdparty/moment/: "" # location where modules are stored
 

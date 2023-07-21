@@ -11,6 +11,6 @@
       showNavButton="true"
       navButtonPress="onNavBack"
         >
-    </MessagePage>
+    </IllustratedMessage>
 
 </mvc:View>
