@@ -14,7 +14,7 @@
     "@sap-ux/eslint-plugin-fiori-tools": "^0.2.0",
     "@sap-ux/ui5-middleware-fe-mockserver": "^2.1.112",
     "@sap/eslint-plugin-ui5-jsdocs": "2.0.5",
-    "@sap/ux-ui5-tooling": "1",
+    "@sap/ux-ui5-tooling": "^1.11.5",
     "@sapui5/ts-types": "~1.116.0",
     "@ui5/cli": "^3.0.0",
     "eslint": "7.32.0",
